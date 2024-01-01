@@ -7,9 +7,17 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+# accumulators for camera
+var rot_x = 0
+var rot_y = 0
+
+var LOOKAROUND_SPEED = 0.002
+
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
-
+	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		$Camera3D.make_current()
+	
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		# Add the gravity.
@@ -32,3 +40,17 @@ func _physics_process(delta):
 			velocity.z = 0
 
 		move_and_slide()
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+			# modify accumulated mouse rotation
+			rot_x -= event.relative.x * LOOKAROUND_SPEED
+			rot_y -= event.relative.y * LOOKAROUND_SPEED
+			if rot_y > 0.8:
+				rot_y = 0.8
+			if rot_y < -0.8:
+				rot_y = -0.8
+			transform.basis = Basis() # reset rotation
+			rotate_object_local(Vector3(0, 1, 0), rot_x) # first rotate in Y
+			rotate_object_local(Vector3(1, 0, 0), rot_y) # then rotate in X
