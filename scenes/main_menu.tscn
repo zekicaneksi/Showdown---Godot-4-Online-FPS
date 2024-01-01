@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b382eg5xcsf0r"]
+[gd_scene load_steps=3 format=3 uid="uid://b382eg5xcsf0r"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_6ke4t"]
 
 [sub_resource type="Theme" id="Theme_bt0da"]
 default_font_size = 40
@@ -11,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_bt0da")
+script = ExtResource("1_6ke4t")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -63,3 +66,7 @@ offset_top = 119.0
 offset_right = 412.0
 offset_bottom = 174.0
 text = "Name:"
+
+[connection signal="pressed" from="HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
