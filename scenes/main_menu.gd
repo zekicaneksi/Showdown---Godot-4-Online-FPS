@@ -6,6 +6,8 @@ extends Control
 
 var peer;
 
+var game_scene = preload("res://scenes/game.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	multiplayer.peer_connected.connect(PlayerConnected)
@@ -26,9 +28,31 @@ func PlayerDisconnected(id):
 
 func ConnectedToServer():
 	print("connected to server")
+	SendPlayerInformation.rpc_id(1, $NameInput.text, multiplayer.get_unique_id())
 	
 func ConnectionFailed():
 	print("connection failed")
+
+@rpc("authority", "call_local")
+func StartGame():
+	var scene = game_scene.instantiate()
+	#get_tree().change_scene_to_packed(game_scene)
+	get_tree().root.add_child(scene)
+	self.hide()
+	
+	
+@rpc("any_peer", "call_remote")
+func SendPlayerInformation(name, id):
+	if !GameManager.Players.has(id):
+		GameManager.Players[id] = {
+			"name": name,
+			"id": id,
+			"score": 0
+		}
+		
+	if multiplayer.is_server():
+		for i in GameManager.Players:
+			SendPlayerInformation.rpc(GameManager.Players[i].name, i)
 
 func _on_host_button_pressed():
 	peer = ENetMultiplayerPeer.new()
@@ -40,6 +64,7 @@ func _on_host_button_pressed():
 	
 	multiplayer.set_multiplayer_peer(peer)
 	print("Waiting for players")
+	SendPlayerInformation($NameInput.text, multiplayer.get_unique_id())
 
 func _on_join_button_pressed():
 	peer = ENetMultiplayerPeer.new()
@@ -48,4 +73,4 @@ func _on_join_button_pressed():
 	multiplayer.set_multiplayer_peer(peer)
 
 func _on_start_button_pressed():
-	pass # Replace with function body.
+	StartGame.rpc()
