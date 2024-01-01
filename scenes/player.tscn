@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://df1h56tigso3i"]
+[gd_scene load_steps=6 format=3 uid="uid://df1h56tigso3i"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_n7nnx"]
 
@@ -12,8 +12,14 @@ size = Vector3(1, 2, 1)
 radius = 0.1
 height = 0.2
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_t4dky"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 0
 script = ExtResource("1_n7nnx")
 metadata/_edit_group_ = true
 
@@ -26,3 +32,6 @@ mesh = SubResource("BoxMesh_geaib")
 [node name="frontStick" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59616, -0.61932)
 mesh = SubResource("CapsuleMesh_bcb77")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_t4dky")

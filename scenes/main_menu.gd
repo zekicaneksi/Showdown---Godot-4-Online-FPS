@@ -36,9 +36,7 @@ func ConnectionFailed():
 @rpc("authority", "call_local")
 func StartGame():
 	var scene = game_scene.instantiate()
-	#get_tree().change_scene_to_packed(game_scene)
-	get_tree().root.add_child(scene)
-	self.hide()
+	get_tree().change_scene_to_packed(game_scene)
 	
 	
 @rpc("any_peer", "call_remote")
