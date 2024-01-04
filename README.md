@@ -4,9 +4,9 @@ A minimal online FPS shooting game made with Godot 4
 
 ### Exporting the Dedicated Server
 
-When exporting, in the Resources tab, set export mode to "Export as dedicated server". Then you can run the exported app from the command line (ie: "./showdown.x86_64")
+When exporting, in the `Resources` tab, set `export mode` to `Export as dedicated server`. Then you can run the exported app from the command line `(ie: ./showdown.x86_64)`
 
-If you get a similar error to "ERROR: Can't create" error, it is probably because the port is already in use.
+If you get a similar error to `ERROR: Can't create` error, it is probably because the port is already in use.
 
 You can see the processes that occupies ports with this in Linux;
 
