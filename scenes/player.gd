@@ -13,8 +13,10 @@ var rot_y = 0
 
 var LOOKAROUND_SPEED = 0.002
 
-func _ready():
+func _enter_tree():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+
+func _ready():
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		$Camera3D.make_current()
 	

@@ -6,7 +6,7 @@ func SpawnPlayer(id):
 	var currentPlayer = player_scene.instantiate()
 	currentPlayer.name = str(id)
 	#currentPlayer.get_node("NameLabel").text = GameManager.Players[id].name
-	currentPlayer.get_node("NameLabel").text = "abcdfe"
+	currentPlayer.get_node("NameLabel").text = "teatatw"
 	$Players.add_child.call_deferred(currentPlayer)
 	currentPlayer.global_position = $SpawnLocation.global_position
 
