@@ -35,29 +35,13 @@ offset_right = 129.0
 offset_bottom = 189.0
 grow_horizontal = 2
 
-[node name="HostButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 320.0
-offset_top = 296.0
-offset_right = 446.0
-offset_bottom = 362.0
-text = "Host"
-
 [node name="JoinButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 834.0
-offset_top = 274.0
-offset_right = 970.0
-offset_bottom = 354.0
+offset_left = 570.0
+offset_top = 362.0
+offset_right = 706.0
+offset_bottom = 442.0
 text = "Join"
-
-[node name="StartButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 541.0
-offset_top = 453.0
-offset_right = 685.0
-offset_bottom = 516.0
-text = "Start"
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 0
@@ -67,6 +51,4 @@ offset_right = 412.0
 offset_bottom = 174.0
 text = "Name:"
 
-[connection signal="pressed" from="HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
