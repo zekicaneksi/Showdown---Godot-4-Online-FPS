@@ -26,29 +26,53 @@ color = Color(0.113725, 0.239216, 0.192157, 1)
 
 [node name="NameInput" type="LineEdit" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -221.0
-offset_top = 74.0
-offset_right = 129.0
-offset_bottom = 189.0
+anchors_preset = -1
+anchor_left = 0.502928
+anchor_top = 0.117188
+anchor_right = 0.502928
+anchor_bottom = 0.117188
+offset_left = -175.0
+offset_right = 175.0
+offset_bottom = 115.0
 grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="JoinButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 570.0
-offset_top = 362.0
-offset_right = 706.0
-offset_bottom = 442.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -40.0
+offset_right = 68.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Join"
 
 [node name="NameLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 286.0
-offset_top = 119.0
-offset_right = 412.0
-offset_bottom = 174.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.248902
+anchor_top = 0.151042
+anchor_right = 0.248902
+anchor_bottom = 0.151042
+offset_right = 126.0
+offset_bottom = 55.0
 text = "Name:"
+metadata/_edit_use_anchors_ = true
+
+[node name="InfoLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.487555
+anchor_top = 0.328125
+anchor_right = 0.487555
+anchor_bottom = 0.328125
+offset_right = 40.0
+offset_bottom = 55.0
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]

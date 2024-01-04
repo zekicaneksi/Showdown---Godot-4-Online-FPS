@@ -5,6 +5,7 @@ var game_scene = preload("res://scenes/game.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	multiplayer.connected_to_server.connect(ConnectedToServer)
+	multiplayer.connection_failed.connect(ConnectionFailed)
 	if OS.has_feature("dedicated_server"):
 		StartGame()
 	
@@ -12,12 +13,22 @@ func _ready():
 func _process(delta):
 	pass
 
+func ConnectionFailed():
+	$NameInput.editable = true
+	$InfoLabel.text = "Failed to connect to server."
+	$JoinButton.disabled = false
+
 func ConnectedToServer():
 	print("connected to server")
 	GameManager.SendPlayerInformation.rpc_id(1, $NameInput.text, multiplayer.get_unique_id())
 	StartGame()
 
 func _on_join_button_pressed():
+	
+	$NameInput.editable = false
+	$InfoLabel.text = "Joining the server..."
+	$JoinButton.disabled = true
+	
 	GameManager.peer = ENetMultiplayerPeer.new()
 	GameManager.peer.create_client(GameManager.Address, GameManager.Port)
 	GameManager.peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)

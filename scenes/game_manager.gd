@@ -10,11 +10,10 @@ var Players = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	multiplayer.peer_connected.connect(PlayerConnected)
-	multiplayer.peer_disconnected.connect(PlayerDisconnected)
-	multiplayer.connection_failed.connect(ConnectionFailed)
-	
 	if OS.has_feature("dedicated_server"):
+		multiplayer.peer_connected.connect(PlayerConnected)
+		multiplayer.peer_disconnected.connect(PlayerDisconnected)
+	
 		GameManager.peer = ENetMultiplayerPeer.new()
 		var error = GameManager.peer.create_server(GameManager.Port, GameManager.Max_Clients)
 		if error != OK:
@@ -30,9 +29,6 @@ func PlayerConnected(id):
 
 func PlayerDisconnected(id):
 	print("Player disconnected with id: " + str(id))
-	
-func ConnectionFailed():
-	print("connection failed")
 	
 @rpc("any_peer", "call_remote")
 func SendPlayerInformation(name, id):
