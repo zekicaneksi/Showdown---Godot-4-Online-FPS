@@ -23,7 +23,7 @@ properties/1/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" groups=["Players"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 0
+collision_layer = 2
 script = ExtResource("1_n7nnx")
 metadata/_edit_group_ = true
 

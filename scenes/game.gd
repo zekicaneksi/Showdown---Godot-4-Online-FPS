@@ -4,6 +4,7 @@ var player_scene = preload("res://scenes/player.tscn")
 
 func SpawnPlayer(id):
 	var currentPlayer = player_scene.instantiate()
+	currentPlayer.hit.connect(PlayerKilled.bind())
 	currentPlayer.name = str(id)
 	#currentPlayer.get_node("NameLabel").text = GameManager.Players[id].name
 	currentPlayer.get_node("NameLabel").text = "teatatw"
@@ -17,6 +18,9 @@ func DespawnPlayer(id):
 		if i.name == str(id):
 			i.queue_free()
 
+func PlayerKilled(killer_id, killed_id):
+	print("telling form server: " + killer_id + "killed" + killed_id)
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if OS.has_feature("dedicated_server"):

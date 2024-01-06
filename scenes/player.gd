@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+signal hit(killer_id, killed_id)
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -68,6 +69,11 @@ func shoot_gun():
 	if !gun_anim.is_playing():
 		gun_anim.play("shoot")
 		var bullet_instance = bulletScene.instantiate()
+		bullet_instance.set_up_variables(name)
 		bullet_instance.position = $Gun/Marker3D.global_position
 		bullet_instance.transform.basis = $Gun/Marker3D.global_transform.basis
 		get_parent().add_child(bullet_instance)
+
+
+func emit_hit(killer_name):
+	emit_signal("hit",killer_name, name)
