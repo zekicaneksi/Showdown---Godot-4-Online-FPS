@@ -7,6 +7,9 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var bulletScene = preload("res://scenes/bullet.tscn")
+@onready var gun_anim = $Gun/AnimationPlayer
+
 # accumulators for camera
 var rot_x = 0
 var rot_y = 0
@@ -40,6 +43,9 @@ func _physics_process(delta):
 		else:
 			velocity.x = 0
 			velocity.z = 0
+			
+		if Input.is_action_pressed("shoot"):
+			shoot_gun.rpc()
 
 		move_and_slide()
 
@@ -56,3 +62,12 @@ func _input(event):
 			transform.basis = Basis() # reset rotation
 			rotate_object_local(Vector3(0, 1, 0), rot_x) # first rotate in Y
 			rotate_object_local(Vector3(1, 0, 0), rot_y) # then rotate in X
+			
+@rpc("any_peer", "call_local")
+func shoot_gun():
+	if !gun_anim.is_playing():
+		gun_anim.play("shoot")
+		var bullet_instance = bulletScene.instantiate()
+		bullet_instance.position = $Gun/Marker3D.global_position
+		bullet_instance.transform.basis = $Gun/Marker3D.global_transform.basis
+		get_parent().add_child(bullet_instance)

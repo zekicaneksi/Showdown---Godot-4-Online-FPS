@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5buslg28e8l2"]
+
+[ext_resource type="Script" path="res://scenes/bullet.gd" id="1_do164"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e00ns"]
+albedo_color = Color(1, 0.47451, 0.0627451, 1)
+emission_enabled = true
+emission = Color(0.756863, 0, 0, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sgshi"]
+material = SubResource("StandardMaterial3D_e00ns")
+radius = 0.01
+height = 1.0
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("1_do164")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_sgshi")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.754173)
+target_position = Vector3(0, 0, -1.5)
+hit_from_inside = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true

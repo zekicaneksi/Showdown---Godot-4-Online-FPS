@@ -1,16 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://df1h56tigso3i"]
+[gd_scene load_steps=7 format=3 uid="uid://df1h56tigso3i"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_n7nnx"]
+[ext_resource type="PackedScene" uid="uid://b8qs0eirmcfwo" path="res://scenes/gun.tscn" id="2_02h05"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x2thl"]
 size = Vector3(1, 2, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_geaib"]
-size = Vector3(1, 2, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ognlt"]
+albedo_color = Color(0.584314, 0.254902, 1, 1)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_bcb77"]
-radius = 0.1
-height = 0.2
+[sub_resource type="BoxMesh" id="BoxMesh_geaib"]
+material = SubResource("StandardMaterial3D_ognlt")
+size = Vector3(1, 2, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_t4dky"]
 properties/0/path = NodePath(".:position")
@@ -32,10 +33,6 @@ shape = SubResource("BoxShape3D_x2thl")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_geaib")
 
-[node name="frontStick" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59616, -0.61932)
-mesh = SubResource("CapsuleMesh_bcb77")
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_t4dky")
 
@@ -45,3 +42,6 @@ transform = Transform3D(1, 0, 0, 0, 0.999927, 0.0121123, 0, -0.0121123, 0.999927
 [node name="NameLabel" type="Label3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.39023, 0)
 text = "name"
+
+[node name="Gun" parent="." instance=ExtResource("2_02h05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.552279, -0.803339)
