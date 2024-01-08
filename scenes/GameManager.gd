@@ -29,6 +29,7 @@ func PlayerConnected(id):
 
 func PlayerDisconnected(id):
 	print("Player disconnected with id: " + str(id))
+	GameManager.Players.erase(id)
 	
 @rpc("any_peer", "call_remote")
 func SendPlayerInformation(name, id):
@@ -38,10 +39,6 @@ func SendPlayerInformation(name, id):
 			"id": id,
 			"score": 0
 		}
-		
-	if multiplayer.is_server():
-		for i in GameManager.Players:
-			SendPlayerInformation.rpc(GameManager.Players[i].name, i)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

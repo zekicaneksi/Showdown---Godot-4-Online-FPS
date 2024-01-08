@@ -12,7 +12,6 @@ func SpawnPlayer(id):
 	currentPlayer.global_position = $SpawnLocation.global_position
 
 func DespawnPlayer(id):
-	GameManager.Players.erase(id)
 	var players = $Players.get_tree().get_nodes_in_group("Players")
 	for i in players:
 		if i.name == str(id):
@@ -35,6 +34,19 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("tab"):
 		$Scoreboard.show()
-		print(GameManager.Players)
+		for i in GameManager.Players:
+			var id_label = Label.new()
+			id_label.text = str(GameManager.Players[i].id)
+			var name_label = Label.new()
+			name_label.text = str(GameManager.Players[i].name)
+			var score_label = Label.new()
+			score_label.text = str(GameManager.Players[i].score)
+			
+			$Scoreboard/ScrollContainer/GridContainer.add_child(id_label)
+			$Scoreboard/ScrollContainer/GridContainer.add_child(name_label)
+			$Scoreboard/ScrollContainer/GridContainer.add_child(score_label)
 	if Input.is_action_just_released("tab"):
 		$Scoreboard.hide()
+		for n in $Scoreboard/ScrollContainer/GridContainer.get_children():
+			$Scoreboard/ScrollContainer/GridContainer.remove_child(n)
+			n.queue_free()
