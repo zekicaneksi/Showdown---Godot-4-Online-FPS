@@ -28,8 +28,13 @@ func _ready():
 		multiplayer.peer_disconnected.connect(DespawnPlayer)
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		$Scoreboard.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if Input.is_action_just_pressed("tab"):
+		$Scoreboard.show()
+		print(GameManager.Players)
+	if Input.is_action_just_released("tab"):
+		$Scoreboard.hide()

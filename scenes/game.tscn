@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://g1oiqdsl20m4"]
+[gd_scene load_steps=8 format=3 uid="uid://g1oiqdsl20m4"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_p74tg"]
 
@@ -18,6 +18,9 @@ size = Vector3(30, 3, 2)
 [sub_resource type="BoxMesh" id="BoxMesh_dj8rl"]
 material = SubResource("StandardMaterial3D_ug07d")
 size = Vector3(30, 3, 2)
+
+[sub_resource type="Theme" id="Theme_c4ec8"]
+default_font_size = 40
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_p74tg")
@@ -85,3 +88,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
 _spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
 spawn_path = NodePath("..")
+
+[node name="Scoreboard" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_c4ec8")
+
+[node name="ColorRect" type="ColorRect" parent="Scoreboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.384314)
+
+[node name="GridContainer" type="GridContainer" parent="Scoreboard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -350.5
+offset_right = 640.0
+offset_bottom = 350.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 500
+columns = 3
+
+[node name="Label" type="Label" parent="Scoreboard/GridContainer"]
+layout_mode = 2
+text = "id"
+
+[node name="Label2" type="Label" parent="Scoreboard/GridContainer"]
+layout_mode = 2
+text = "name"
+
+[node name="Label3" type="Label" parent="Scoreboard/GridContainer"]
+layout_mode = 2
+text = "score"
