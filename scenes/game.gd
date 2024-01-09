@@ -18,7 +18,7 @@ func DespawnPlayer(id):
 			i.queue_free()
 
 func PlayerKilled(killer_id, killed_id):
-	print("telling form server: " + killer_id + "killed" + killed_id)
+	GameManager.Players[killer_id.to_int()].score += 1
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
