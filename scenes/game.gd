@@ -9,7 +9,6 @@ func SpawnPlayer(id):
 	#currentPlayer.get_node("NameLabel").text = GameManager.Players[id].name
 	currentPlayer.get_node("NameLabel").text = "teatatw"
 	$Players.add_child.call_deferred(currentPlayer)
-	currentPlayer.global_position = $SpawnLocation.global_position
 
 func DespawnPlayer(id):
 	var players = $Players.get_tree().get_nodes_in_group("Players")
@@ -17,8 +16,16 @@ func DespawnPlayer(id):
 		if i.name == str(id):
 			i.queue_free()
 
+@rpc("authority", "call_local")
+func RespawnPlayer(id):
+	var players = $Players.get_tree().get_nodes_in_group("Players")
+	for i in players:
+		if i.name == str(id):
+			i.global_position = $SpawnLocation.global_position
+
 func PlayerKilled(killer_id, killed_id):
 	GameManager.Players[killer_id.to_int()].score += 1
+	RespawnPlayer.rpc(killed_id.to_int())
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():

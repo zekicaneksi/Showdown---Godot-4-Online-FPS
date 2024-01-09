@@ -21,8 +21,9 @@ func _physics_process(delta):
 	if ray.is_colliding():
 		mesh.visible = false
 		ray.enabled = false
-		if ray.get_collider().is_in_group("Players"):
-			ray.get_collider().emit_hit(belongs_to_player)
+		if OS.has_feature("dedicated_server"):
+			if ray.get_collider().is_in_group("Players"):
+				ray.get_collider().emit_hit(belongs_to_player)
 		queue_free()
 
 
