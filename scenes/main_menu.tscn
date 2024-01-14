@@ -67,12 +67,14 @@ metadata/_edit_use_anchors_ = true
 [node name="InfoLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.487555
-anchor_top = 0.328125
-anchor_right = 0.487555
-anchor_bottom = 0.328125
+anchor_left = 0.38653
+anchor_top = 0.304688
+anchor_right = 0.592972
+anchor_bottom = 0.348958
 offset_right = 40.0
 offset_bottom = 55.0
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
