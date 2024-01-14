@@ -6,7 +6,7 @@
 size = Vector3(30, 2, 30)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ug07d"]
-albedo_color = Color(0.180392, 0.129412, 0.0823529, 1)
+albedo_color = Color(0.152941, 0.145098, 0.0235294, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_r7sdq"]
 material = SubResource("StandardMaterial3D_ug07d")
@@ -78,7 +78,10 @@ shape = SubResource("BoxShape3D_40hq8")
 mesh = SubResource("BoxMesh_dj8rl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 13, 0)
+transform = Transform3D(0.587813, -0.577433, -0.56661, 0, -0.700386, 0.713764, -0.808996, -0.41956, -0.411697, -14.7103, 13, -14.1123)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.295058, -0.72241, 0.625352, 0, 0.65449, 0.756071, -0.955479, -0.223084, 0.193112, 17.4524, 13, 14.4106)
 
 [node name="SpawnLocation" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)

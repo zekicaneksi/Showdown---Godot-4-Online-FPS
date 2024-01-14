@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 signal hit(killer_id, killed_id)
 
-const SPEED = 5.0
+const SPEED = 12.0
 const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
