@@ -1,7 +1,7 @@
 extends Node
 
-var Address = "127.0.0.1"
-var Port = 3000
+var Address
+var Port
 var Max_Clients = 128
 
 var peer;
@@ -10,6 +10,18 @@ var Players = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Reading the env variables
+	var env_file = FileAccess.open("res://env.json", FileAccess.READ)
+	if env_file == null:
+		print("Please provide the env file")
+		get_tree().quit()
+		return
+	var env_content_text = env_file.get_as_text()
+	var env_dict = JSON.parse_string(env_content_text)
+	
+	Address = env_dict["ADDRESS"]
+	Port = env_dict["PORT"]
+		
 	if OS.has_feature("dedicated_server"):
 		multiplayer.peer_connected.connect(PlayerConnected)
 		multiplayer.peer_disconnected.connect(PlayerDisconnected)
@@ -22,7 +34,7 @@ func _ready():
 		GameManager.peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 		
 		multiplayer.set_multiplayer_peer(GameManager.peer)
-		print("Hosting...")
+		print("Hosting on port " + str(Port) + "...")
 
 func PlayerConnected(id):
 	print("Player connected with id: " + str(id))
