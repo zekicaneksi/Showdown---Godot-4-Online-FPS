@@ -2,13 +2,12 @@ extends Node3D
 
 var player_scene = preload("res://scenes/player.tscn")
 
-func SpawnPlayer(id):
-	var currentPlayer = player_scene.instantiate()
-	currentPlayer.hit.connect(PlayerKilled.bind())
-	currentPlayer.name = str(id)
-	#currentPlayer.get_node("NameLabel").text = GameManager.Players[id].name
-	currentPlayer.get_node("NameLabel").text = "teatatw"
-	$Players.add_child.call_deferred(currentPlayer)
+func SpawnPlayer_Server(id):
+	var spawnData = {
+		"id": id,
+		"name": GameManager.Players[id].name
+	}
+	$Players/MultiplayerSpawner.spawn(spawnData)
 
 func DespawnPlayer(id):
 	var players = $Players.get_tree().get_nodes_in_group("Players")
@@ -23,14 +22,21 @@ func RespawnPlayer(id):
 		if i.name == str(id):
 			i.global_position = $SpawnLocation.global_position
 
+func SpawnPlayer(data):
+	var currentPlayer = player_scene.instantiate()
+	currentPlayer.hit.connect(PlayerKilled.bind())
+	currentPlayer.name = str(data.id)
+	currentPlayer.get_node("NameLabel").text = data.name
+	return currentPlayer
+
 func PlayerKilled(killer_id, killed_id):
 	GameManager.Players[killer_id.to_int()].score += 1
 	RespawnPlayer.rpc(killed_id.to_int())
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Players/MultiplayerSpawner.set_spawn_function(SpawnPlayer)
 	if OS.has_feature("dedicated_server"):
-		multiplayer.peer_connected.connect(SpawnPlayer)
 		multiplayer.peer_disconnected.connect(DespawnPlayer)
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

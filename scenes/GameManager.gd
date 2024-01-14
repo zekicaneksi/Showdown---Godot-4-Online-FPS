@@ -39,6 +39,9 @@ func SendPlayerInformation(name, id):
 			"id": id,
 			"score": 0
 		}
+		
+		var game_node = get_parent().get_node("Game")
+		game_node.SpawnPlayer_Server(id)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
