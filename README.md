@@ -13,9 +13,9 @@ A json file at the root directory of the project named `env.json` must be create
 ```
 
 - ADDRESS
- - The address the clients (players) will try to connect to.
+	- The address the clients (players) will try to connect to.
 - PORT
- - The port the server will listen on and the clients (players) will try to connect to.
+	- The port the server will listen on and the clients (players) will try to connect to.
 
 ### Exporting the Dedicated Server
 
