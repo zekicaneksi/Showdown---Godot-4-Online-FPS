@@ -19,8 +19,13 @@ The dedicated server hosts the game. Players open the game, put their names in a
 
 ![image](https://github.com/zekicaneksi/Showdown---Godot-4-Online-FPS/assets/59491631/0276f6ed-ee76-4974-917e-4a1ef121f5fd)
 
+## Setting Up the Project
 
-## Environment Variables
+- Set the environment variables file
+- Export and host the server
+- Run the client/game and join the game.
+
+### Environment Variables
 
 A json file at the root directory of the project named `env.json` must be created. Example;
 ```
@@ -35,7 +40,7 @@ A json file at the root directory of the project named `env.json` must be create
 - PORT
 	- The port the server will listen on and the clients (players) will try to connect to.
 
-## Exporting the Dedicated Server
+### Exporting the Dedicated Server
 
 When exporting, in the `Resources` tab, set `export mode` to `Export as dedicated server`. Then you can run the exported app from the command line `(ie: ./showdown.x86_64)`
 
